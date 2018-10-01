@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {Fragment} from 'react'
 import {
   Switch,
   Route,
@@ -6,6 +6,7 @@ import {
   withRouter,
 } from 'react-router-dom'
 import { Menu } from 'semantic-ui-react'
+import AddIngredient from './AddIngredient'
 
 const links = [
   'recipes',
@@ -15,7 +16,8 @@ const links = [
 ]
 
 const App = ({location}) => (
-  <div> 
+  <Fragment>
+  <Menu> 
     { links.map( link =>
         <Link key={link} to={`/${link}`}>
         <Menu.Item
@@ -25,7 +27,11 @@ const App = ({location}) => (
         </Link>
       )
     }
-  </div>
+  </Menu>
+  <Switch>
+    <Route exact path="/add_ingredients" component={AddIngredient} />
+  </Switch>
+  </Fragment>
 )
 
 export default withRouter(App)
