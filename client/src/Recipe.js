@@ -3,8 +3,8 @@ import axios from 'axios'
 import {
   Form,
   Card,
-  Button,
   Header,
+  List,
 } from 'semantic-ui-react'
 
 
@@ -49,12 +49,23 @@ class Recipe extends React.Component {
   handleChange = (e) => {
     this.setState({ amount: e.target.value})
   }
+
+  mapIngredients = () => {
+    const {recipe, ingredients } = this.state
+    return recipe.ingredients.map ( ing => {
+      return{
+        amount: ing.amount,
+        name: ingredients.find( i => i.id === ing.ingredient_id ).name
+      }
+    })
+  }
   render() {
     const { 
-      recipe: { ingredients: [] },
+      recipe: { name, description },
       ingredients: [],
       ingredient,
       amount,
+
     } = this.state
     return (
       <div>
@@ -84,6 +95,18 @@ class Recipe extends React.Component {
             </Form>
           </Card.Content>
         </Card>
+        <List divided>
+          { 
+            this.mapIngredients().map( i => 
+                <List.Item key={i.id}>
+                <List.Content>
+                  <List.Header>{i.name}</List.Header>
+                  <List.Description>{i.amount}</List.Description>
+                </List.Content>
+                </List.Item>
+              )
+          }
+        </List>
       </div>
     )
   }

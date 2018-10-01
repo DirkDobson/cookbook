@@ -17,7 +17,12 @@ class Api::RecipesController < ApplicationController
   def create
     recipe = Recipe.new(recipe_params)
     if recipe.save
-      render json: recipe
+      render json: {
+        id: @recipe.id,
+        name: @recipe.name,
+        description: @recipe.description,
+        ingredients: @recipe.recipe_ingredients
+      }
     else
       render_error(recipe)
     end
