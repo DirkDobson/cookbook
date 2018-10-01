@@ -1,21 +1,31 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from 'react'
+import {
+  Switch,
+  Route,
+  Link, 
+  withRouter,
+} from 'react-router-dom'
+import { Menu } from 'semantic-ui-react'
 
-class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
-      </div>
-    );
-  }
-}
+const links = [
+  'recipes',
+  'ingredients',
+  'add_ingredients',
+  'add_recipe',
+]
 
-export default App;
+const App = ({location}) => (
+  <div> 
+    { links.map( link =>
+        <Link key={link} to={`/${link}`}>
+        <Menu.Item
+        name={link}
+        active={ `/${link}` === location.pathname}
+        />
+        </Link>
+      )
+    }
+  </div>
+)
+
+export default withRouter(App)
