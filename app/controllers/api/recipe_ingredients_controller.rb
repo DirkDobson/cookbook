@@ -2,7 +2,7 @@ class Api::RecipeIngredientsController < ApplicationController
 
 
   def new
-    ingredients = Ingredient.all.map { |i| {name: i.name, :id i.id } }
+    ingredients = Ingredient.all.map { |i| {name: i.name, id: i.id } }
     render json: ingredients
   end
   def create

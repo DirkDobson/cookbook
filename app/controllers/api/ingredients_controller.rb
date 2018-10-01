@@ -39,5 +39,5 @@ class Api::IngredientsController < ApplicationController
     params.require(:ingredient).permit(:name)
   end
 
-  end
+
 end

@@ -6,7 +6,12 @@ class Api::RecipesController < ApplicationController
   end
 
   def show
-    render json: @recipe
+    render json: @recipe {
+      id: @recipe.id,
+      name: @recipe.name,
+      description: @recipe.description,
+      ingredients: @recipe.recipe_ingredients
+    }
   end
 
   def create
@@ -29,7 +34,7 @@ class Api::RecipesController < ApplicationController
   def destroy
     @recipe.destroy
   end
-  
+
   private 
   def set_recipe
     @recipe = Recipe.find(params[:id])
